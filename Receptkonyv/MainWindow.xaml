@@ -5,8 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Receptkonyv"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+       Title="Receptkönyv - Főmenü" Height="450" Width="800" WindowStartupLocation="CenterScreen">
 
-    </Grid>
+	<DockPanel>
+
+		<Menu DockPanel.Dock="Top" FontSize="14" Padding="5">
+			<MenuItem Header="_Fájl">
+				<MenuItem Header="_Kilépés" Click="Kilepes_Click"/>
+			</MenuItem>
+			<MenuItem Header="_Kezelés">
+				<MenuItem Header="_Kategóriák kezelése" Click="Kategoriak_Click"/>
+				<MenuItem Header="_Receptek kezelése" Click="Receptek_Click"/>
+			</MenuItem>
+		</Menu>
+
+		<Grid Background="#FFF3E0">
+			<TextBlock Text="Üdvözöllek a Receptkönyv alkalmazásban!"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="#D84315"/>
+		</Grid>
+	</DockPanel>
 </Window>

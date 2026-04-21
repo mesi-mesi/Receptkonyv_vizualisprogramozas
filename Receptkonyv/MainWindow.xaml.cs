@@ -20,5 +20,20 @@ namespace Receptkonyv
         {
             InitializeComponent();
         }
+
+        private void Kilepes_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void Kategoriak_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Itt fog megnyílni a Kategóriák ablaka!", "Hamarosan...");
+        }
+
+        private void Receptek_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Itt fog megnyílni a Receptek listája (DataGrid)!", "Hamarosan...");
+        }
     }
 }
