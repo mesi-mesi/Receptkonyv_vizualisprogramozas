@@ -15,7 +15,7 @@ namespace Receptkonyv
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // A kapcsolat a LocalDB-hez, pontosan a tanári minta alapján
+                // A kapcsolat a LocalDB-hez
                 optionsBuilder.UseSqlServer(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=ReceptkonyvDB;Integrated Security=True;Persist Security Info=True");
             }
         }
