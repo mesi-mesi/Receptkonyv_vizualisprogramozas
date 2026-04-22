@@ -1,0 +1,35 @@
+﻿<Window x:Class="Receptkonyv.ReceptekAblak"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Receptek Kezelése" Height="450" Width="600" WindowStartupLocation="CenterOwner">
+
+	<Grid Background="#FFF3E0" Margin="10">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
+			<Label Content="Keresés recept címe alapján:" FontWeight="Bold" VerticalAlignment="Center"/>
+			<TextBox x:Name="tbKereso" Width="200" Margin="10,0,0,0" VerticalContentAlignment="Center"
+                     TextChanged="tbKereso_TextChanged"/>
+		</StackPanel>
+
+		<DataGrid x:Name="dgReceptek" Grid.Row="1" AutoGenerateColumns="False"
+                  CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Azonosító" Binding="{Binding Id}" Width="Auto"/>
+				<DataGridTextColumn Header="Recept Címe" Binding="{Binding Cim}" Width="*"/>
+				<DataGridTextColumn Header="Elkészítési idő (perc)" Binding="{Binding ElkeszitesiIdo}" Width="Auto"/>
+				<DataGridTextColumn Header="Kategória" Binding="{Binding Kategoria.Megnevezes}" Width="Auto"/>
+			</DataGrid.Columns>
+		</DataGrid>
+
+		<StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,0" HorizontalAlignment="Center">
+			<Button x:Name="btUj" Content="Új Recept" Width="100" Height="30" Margin="5" Background="#81C784" Click="btUj_Click"/>
+			<Button x:Name="btModosit" Content="Módosítás" Width="100" Height="30" Margin="5" Background="#FFF176" Click="btModosit_Click"/>
+			<Button x:Name="btTorol" Content="Törlés" Width="100" Height="30" Margin="5" Background="#E57373" Click="btTorol_Click"/>
+		</StackPanel>
+	</Grid>
+</Window>

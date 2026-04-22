@@ -33,7 +33,9 @@ namespace Receptkonyv
 
         private void Receptek_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Itt fog megnyílni a Receptek listája (DataGrid)!", "Hamarosan...");
+            ReceptekAblak ablak = new ReceptekAblak();
+            ablak.Owner = this;
+            ablak.ShowDialog();
         }
     }
 }
