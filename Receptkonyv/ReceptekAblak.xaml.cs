@@ -92,21 +92,80 @@ namespace Receptkonyv
         }
 
         //Leválasztott (Detached) állapot generálása lekérdezéskor.
+        // A kiválasztott recept hozzávalóinak megjelenítése
+        // A kiválasztott recept hozzávalóinak megjelenítése
+
+        // A kiválasztott recept hozzávalóinak megjelenítése
         private void btReszletek_Click(object sender, RoutedEventArgs e)
         {
+            // 1. Ellenőrizzük, hogy ki van-e jelölve egy recept a táblázatban
             if (dgReceptek.SelectedItem is Recept kivalasztott)
             {
-                var levalasztottRecept = db.Receptek
-                                           .AsNoTracking()
-                                           .FirstOrDefault(r => r.Id == kivalasztott.Id);
+                // 2. Lekérdezzük a receptet az adatbázisból az ID alapján,
+                // és az .Include() segítségével "beemeljük" a hozzá tartozó Hozzávalók listáját is.
+                var receptHozzavalokkal = db.Receptek
+                                            .Include(r => r.Hozzavalok)
+                                            .FirstOrDefault(r => r.Id == kivalasztott.Id);
 
-                if (levalasztottRecept != null)
+                if (receptHozzavalokkal != null)
                 {
-                    MessageBox.Show($"Ez a recept most 'Detached' állapotban van!\n\n" +
-                                    $"Név: {levalasztottRecept.Cim}\n" +
-                                    $"Ha most átírnánk a kódban, a db.SaveChanges() nem mentené el.",
-                                    "EF Core Tracking Demo");
+                    // 3. Felépítjük az üzenetablak tartalmát
+                    string uzenet = $"=== {receptHozzavalokkal.Cim.ToUpper()} ===\n\n";
+
+                    if (receptHozzavalokkal.Hozzavalok != null && receptHozzavalokkal.Hozzavalok.Any())
+                    {
+                        uzenet += "Szükséges hozzávalók:\n";
+                        uzenet += "----------------------------------\n";
+                        foreach (var h in receptHozzavalokkal.Hozzavalok)
+                        {
+                            uzenet += $"• {h.Nev}: {h.Mennyiseg}\n";
+                        }
+                    }
+                    else
+                    {
+                        uzenet += "Ehhez a recepthez még nem rögzítettél hozzávalókat.\n";
+                        uzenet += "Használd a '+ Hozzávaló' gombot a bővítéshez!";
+                    }
+
+                    // 4. Megjelenítés egy ízléses MessageBox-ban
+                    MessageBox.Show(uzenet, "Recept Részletei", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Kérlek, előbb válassz ki egy receptet a listából!", "Nincs kijelölés", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        // Új hozzávaló hozzáadása a kiválasztott recepthez
+        private void btUjHozzavalo_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgReceptek.SelectedItem is Recept kivalasztottRecept)
+            {
+                // Megnyitjuk a kis felugró ablakot
+                UjHozzavaloAblak ablak = new UjHozzavaloAblak();
+                ablak.Owner = this;
+
+                if (ablak.ShowDialog() == true)
+                {
+                    // Létrehozzuk az új hozzávalót a beírt adatokból
+                    var ujHozzavalo = new Hozzavalo
+                    {
+                        Nev = ablak.UjNev,
+                        Mennyiseg = ablak.UjMennyiseg,
+                        ReceptId = kivalasztottRecept.Id // Összekötjük a kiválasztott recepttel (Külső kulcs!)
+                    };
+
+                    // Elmentjük az adatbázisba
+                    db.Hozzavalok.Add(ujHozzavalo);
+                    db.SaveChanges();
+
+                    MessageBox.Show("A hozzávaló sikeresen rögzítve!", "Siker", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Kérlek, válassz ki egy receptet a listából, amihez a hozzávalót adod!", "Figyelem", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 

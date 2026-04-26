@@ -2,7 +2,6 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Receptek Kezelése" Height="450" Width="600" WindowStartupLocation="CenterOwner">
-
 	<Grid Background="#FFF3E0" Margin="10">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
@@ -30,7 +29,9 @@
 			<Button x:Name="btUj" Content="Új Recept" Width="100" Height="30" Margin="5" Background="#81C784" Click="btUj_Click"/>
 			<Button x:Name="btModosit" Content="Módosítás" Width="100" Height="30" Margin="5" Background="#FFF176" Click="btModosit_Click"/>
 			<Button x:Name="btTorol" Content="Törlés" Width="100" Height="30" Margin="5" Background="#E57373" Click="btTorol_Click"/>
-			<Button x:Name="btReszletek" Content="Részletek (Detached)" Width="120" Height="30" Margin="5" Background="#90CAF9" Click="btReszletek_Click"/>
+			<Button x:Name="btReszletek" Content="Részletek" Width="100" Height="30" Margin="5" Background="#64B5F6" Click="btReszletek_Click"/>
+			<Button x:Name="btUjHozzavalo" Content="+ Hozzávaló" Width="100" Height="30" Margin="5" Background="#BA68C8" Click="btUjHozzavalo_Click"/>
 		</StackPanel>
+
 	</Grid>
 </Window>
