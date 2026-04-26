@@ -1,0 +1,33 @@
+﻿<Window x:Class="Receptkonyv.KategoriakAblak"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kategóriák Kezelése" Height="400" Width="450" WindowStartupLocation="CenterOwner">
+
+	<Grid Background="#E8F5E9" Margin="10">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0,0,0,10">
+			<Label Content="Keresés megnevezés alapján:" FontWeight="Bold" VerticalAlignment="Center"/>
+			<TextBox x:Name="tbKereso" Width="150" Margin="10,0,0,0" VerticalContentAlignment="Center"
+                     TextChanged="tbKereso_TextChanged"/>
+		</StackPanel>
+
+		<DataGrid x:Name="dgKategoriak" Grid.Row="1" AutoGenerateColumns="False"
+                  CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Azonosító" Binding="{Binding Id}" Width="Auto"/>
+				<DataGridTextColumn Header="Megnevezés" Binding="{Binding Megnevezes}" Width="*"/>
+			</DataGrid.Columns>
+		</DataGrid>
+
+		<StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,0" HorizontalAlignment="Center">
+			<Label Content="Új Kategória neve:" VerticalAlignment="Center"/>
+			<TextBox x:Name="tbUjKategoria" Width="120" Margin="5,0"/>
+			<Button x:Name="btUj" Content="Hozzáad" Width="80" Height="30" Background="#81C784" Click="btUj_Click"/>
+		</StackPanel>
+	</Grid>
+</Window>

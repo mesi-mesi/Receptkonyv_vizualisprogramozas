@@ -3,6 +3,10 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.EntityFrameworkCore;
 
+// PROJEKT: Receptkönyv
+// FORRÁSOK: Cn-LINQ_OfType, WPF-DataBinding-DataGrid-Auto, Cn-EFC-MF-PhoneBookSimple, WPF-CustomDialogBox_SimpleDataBinding
+// LOGIKA: Adatlekérés (Include), LINQ szűrés (Where), és adatbázis műveletek (CRUD).
+
 namespace Receptkonyv
 {
     public partial class ReceptekAblak : Window
@@ -16,11 +20,13 @@ namespace Receptkonyv
             AdatokBetoltese();
         }
 
+        // Adatok betöltése.
         private void AdatokBetoltese()
         {
             dgReceptek.ItemsSource = db.Receptek.Include(r => r.Kategoria).ToList();
         }
 
+        // Szűrés a memóriában lévő listán.
         private void tbKereso_TextChanged(object sender, TextChangedEventArgs e)
         {
             string keresoSzo = tbKereso.Text.ToLower();
@@ -32,6 +38,7 @@ namespace Receptkonyv
             dgReceptek.ItemsSource = szurtLista;
         }
 
+        // Új objektum felivtele az eadatbázisba.
         private void btUj_Click(object sender, RoutedEventArgs e)
         {
             var ujRecept = new Recept();
@@ -43,9 +50,11 @@ namespace Receptkonyv
             {
                 db.Receptek.Add(ablak.AktualisRecept);
                 db.SaveChanges();
-                AdatokBetoltese(); 
+                AdatokBetoltese();
             }
         }
+
+        //Adatmódosítás.
         private void btModosit_Click(object sender, RoutedEventArgs e)
         {
             if (dgReceptek.SelectedItem is Recept kivalasztottRecept)
@@ -64,6 +73,8 @@ namespace Receptkonyv
                 MessageBox.Show("Kérlek, válassz ki egy receptet a módosításhoz!");
             }
         }
+
+        //Adat törlése
         private void btTorol_Click(object sender, RoutedEventArgs e)
         {
             if (dgReceptek.SelectedItem is Recept kivalasztottRecept)
@@ -76,6 +87,25 @@ namespace Receptkonyv
                     db.Receptek.Remove(kivalasztottRecept);
                     db.SaveChanges();
                     AdatokBetoltese();
+                }
+            }
+        }
+
+        //Leválasztott (Detached) állapot generálása lekérdezéskor.
+        private void btReszletek_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgReceptek.SelectedItem is Recept kivalasztott)
+            {
+                var levalasztottRecept = db.Receptek
+                                           .AsNoTracking()
+                                           .FirstOrDefault(r => r.Id == kivalasztott.Id);
+
+                if (levalasztottRecept != null)
+                {
+                    MessageBox.Show($"Ez a recept most 'Detached' állapotban van!\n\n" +
+                                    $"Név: {levalasztottRecept.Cim}\n" +
+                                    $"Ha most átírnánk a kódban, a db.SaveChanges() nem mentené el.",
+                                    "EF Core Tracking Demo");
                 }
             }
         }

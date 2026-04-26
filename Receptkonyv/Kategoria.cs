@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 
+// PROJEKT: Receptkönyv 
+// FORRÁS: Cn-EFC-MF-PhoneBookSimple (efPhoneBook.Person.cs minta alapján)
+// LOGIKA: Az entitás alapú modellezés (POCO osztályok) és 1:N kapcsolatok.
+
 namespace Receptkonyv
 {
     public class Kategoria

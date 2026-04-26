@@ -1,7 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration; 
+
+// PROJEKT: Receptkönyv
+// FORRÁSOK: Hivatalos projektkövetelmény (appsettings.json használata)
+// LOGIKA: A kapcsolati sztring dinamikus beolvasása a kőbe vésett kód helyett.
 
 namespace Receptkonyv
 {
@@ -15,8 +19,15 @@ namespace Receptkonyv
         {
             if (!optionsBuilder.IsConfigured)
             {
-                // A kapcsolat a LocalDB-hez
-                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=ReceptkonyvDB;Integrated Security=True;Persist Security Info=True");
+                // Konfiguráció felépítése és beolvasása az appsettings.json fájlból
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .Build();
+
+                //A "DefaultConnection" nevű sztring kiolvasása a JSON-ből
+                string connectionString = configuration.GetConnectionString("DefaultConnection");
+                optionsBuilder.UseSqlServer(connectionString);
             }
         }
     }

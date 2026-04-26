@@ -1,10 +1,11 @@
 using System.Windows;
 
+// PROJEKT: Receptkönyv
+// FORRÁS: WPF-CustomDialogBox_SimpleDataBinding (AssemblyInfo.cs minta)
+// LOGIKA: WPF téma-erőforrások helyének meghatározása (Standard WPF beállítás)
+
 [assembly: ThemeInfo(
-    ResourceDictionaryLocation.None,            //where theme specific resource dictionaries are located
-                                                //(used if a resource is not found in the page,
-                                                // or application resource dictionaries)
-    ResourceDictionaryLocation.SourceAssembly   //where the generic resource dictionary is located
-                                                //(used if a resource is not found in the page,
-                                                // app, or any theme specific resource dictionaries)
+    ResourceDictionaryLocation.None,            // Témafüggő erőforrások helye
+    ResourceDictionaryLocation.SourceAssembly   // Általános erőforrások helye
+
 )]

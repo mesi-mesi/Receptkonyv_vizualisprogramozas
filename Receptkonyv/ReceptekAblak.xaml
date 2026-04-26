@@ -30,6 +30,7 @@
 			<Button x:Name="btUj" Content="Új Recept" Width="100" Height="30" Margin="5" Background="#81C784" Click="btUj_Click"/>
 			<Button x:Name="btModosit" Content="Módosítás" Width="100" Height="30" Margin="5" Background="#FFF176" Click="btModosit_Click"/>
 			<Button x:Name="btTorol" Content="Törlés" Width="100" Height="30" Margin="5" Background="#E57373" Click="btTorol_Click"/>
+			<Button x:Name="btReszletek" Content="Részletek (Detached)" Width="120" Height="30" Margin="5" Background="#90CAF9" Click="btReszletek_Click"/>
 		</StackPanel>
 	</Grid>
 </Window>
