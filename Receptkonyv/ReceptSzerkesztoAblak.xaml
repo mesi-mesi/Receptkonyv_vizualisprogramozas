@@ -1,33 +1,60 @@
 ﻿<Window x:Class="Receptkonyv.ReceptSzerkesztoAblak"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Recept Szerkesztése" Height="250" Width="400" WindowStartupLocation="CenterOwner">
+        Title="Recept Szerkesztése" Height="450" Width="800" WindowStartupLocation="CenterOwner">
 
-	<Grid x:Name="grFelulet" Margin="10">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="140"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="40"/>
-			<RowDefinition Height="40"/>
-			<RowDefinition Height="40"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
+    <Grid x:Name="grFelulet" Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-		<Label Content="Recept címe:" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"/>
-		<TextBox Text="{Binding Cim}" VerticalContentAlignment="Center" Margin="5" Grid.Row="0" Grid.Column="1"/>
+        <UniformGrid Columns="3" Grid.Row="0" Margin="0,0,0,10">
+            <StackPanel Margin="5">
+                <Label Content="Recept címe:" FontWeight="Bold"/>
+                <TextBox Text="{Binding Cim}" VerticalContentAlignment="Center" Height="25"/>
+            </StackPanel>
 
-		<Label Content="Elkészítési idő (perc):" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
-		<TextBox Text="{Binding ElkeszitesiIdo}" VerticalContentAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="1"/>
+            <StackPanel Margin="5">
+                <Label Content="Elkészítési idő (perc):" FontWeight="Bold"/>
+                <TextBox Text="{Binding ElkeszitesiIdo}" VerticalContentAlignment="Center" Height="25"/>
+            </StackPanel>
 
-		<Label Content="Kategória:" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
-		<ComboBox x:Name="cbKategoria" DisplayMemberPath="Megnevezes" SelectedValuePath="Id"
-                  SelectedValue="{Binding KategoriaId}" Margin="5" Grid.Row="2" Grid.Column="1"/>
+            <StackPanel Margin="5">
+                <Label Content="Kategória:" FontWeight="Bold"/>
+                <ComboBox x:Name="cbKategoria" DisplayMemberPath="Megnevezes" SelectedValuePath="Id"
+                          SelectedValue="{Binding KategoriaId}" Height="25"/>
+            </StackPanel>
+        </UniformGrid>
 
-		<StackPanel Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,15,0,0">
-			<Button Content="Mentés" IsDefault="True" Width="100" Height="30" Margin="10,0" Background="#81C784" Click="Mentés_Click"/>
-			<Button Content="Mégse" IsCancel="True" Width="100" Height="30" Margin="10,0" Background="#E57373"/>
-		</StackPanel>
-	</Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid x:Name="dgHozzavalok" Grid.Column="0" Margin="5" 
+                      AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Megnevezés" Binding="{Binding Nev}" Width="*"/>
+                    <DataGridTextColumn Header="Mennyiség" Binding="{Binding Mennyiseg}" Width="150"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="5,0,0,0">
+                <Label Content="Műveletek:" FontWeight="Bold"/>
+                <Button x:Name="btHozzavaloUj" Content="Új hozzávaló" Margin="0,5" Height="30" Click="btHozzavaloUj_Click" Background="#E3F2FD"/>
+                <Button x:Name="btHozzavaloModosit" Content="Módosítás" Margin="0,5" Height="30" Click="btHozzavaloModosit_Click" Background="#FFFDE7"/>
+                <Button x:Name="btHozzavaloTorol" Content="Törlés" Margin="0,5" Height="30" Click="btHozzavaloTorol_Click" Background="#FFEBEE"/>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button x:Name="btMentes" Content="Mentés" Width="120" Height="35" Margin="10,0" 
+                    IsDefault="True" Click="Mentés_Click" Background="#C8E6C9" FontWeight="Bold"/>
+            <Button x:Name="btMegse" Content="Mégse" Width="120" Height="35" Margin="0" 
+                    IsCancel="True" Background="#FFCCBC"/>
+        </StackPanel>
+    </Grid>
 </Window>

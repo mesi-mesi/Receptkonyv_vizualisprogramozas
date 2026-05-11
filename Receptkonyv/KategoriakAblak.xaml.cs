@@ -52,5 +52,41 @@ namespace Receptkonyv
                 MessageBox.Show("Kérlek add meg az új kategória nevét!");
             }
         }
+
+        // Kategória törlése feltétellel
+        private void btTorol_Click(object sender, RoutedEventArgs e)
+        {
+            // 1. Ellenőrizzük, hogy van-e kijelölve kategória
+            if (dgKategoriak.SelectedItem is Kategoria kivalasztott)
+            {
+                // 2. Ellenőrizzük az adatbázisban, hogy van-e hozzárendelt recept
+                // (Megnézzük, létezik-e bármilyen recept ezzel a KategoriaId-val)
+                bool vanHozzaadottRecept = db.Receptek.Any(r => r.KategoriaId == kivalasztott.Id);
+
+                if (vanHozzaadottRecept)
+                {
+                    // Ha van recept, megtiltjuk a törlést
+                    MessageBox.Show("Ez a kategória nem törölhető, mert receptek vannak hozzárendelve!",
+                                    "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    // 3. Ha nincs recept, megerősítést kérünk és törlünk
+                    var valasz = MessageBox.Show($"Biztosan törlöd a(z) '{kivalasztott.Megnevezes}' kategóriát?",
+                                                 "Törlés megerősítése", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                    if (valasz == MessageBoxResult.Yes)
+                    {
+                        db.Kategoriak.Remove(kivalasztott);
+                        db.SaveChanges();
+                        AdatokBetoltese();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Kérlek, válassz ki egy kategóriát a listából a törléshez!", "Figyelem", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
     }
 }
