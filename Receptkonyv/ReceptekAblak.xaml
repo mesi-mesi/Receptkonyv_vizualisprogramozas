@@ -26,10 +26,26 @@
         </DataGrid>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,0" HorizontalAlignment="Center">
-            <Button x:Name="btUj" Content="Új Recept" Width="100" Height="30" Margin="5" Background="#81C784" Click="btUj_Click"/>
-            <Button x:Name="btModosit" Content="Módosítás / + Hozzávalók" Width="160" Height="30" Margin="5" Background="#FFF176" Click="btModosit_Click"/>
-            <Button x:Name="btTorol" Content="Törlés" Width="100" Height="30" Margin="5" Background="#E57373" Click="btTorol_Click"/>
-            <Button x:Name="btReszletek" Content="Részletek" Width="100" Height="30" Margin="5" Background="#64B5F6" Click="btReszletek_Click"/>
+            <Button x:Name="btUj" Content="Új Recept" Width="100" Height="30" Margin="5" Background="#AED581" Click="btUj_Click"/>
+            <Button x:Name="btModosit" Width="180" Height="30" Margin="5" 
+        Click="btModosit_Click" Foreground="Black">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Color="#FFF176" Offset="0.20"/>
+                        <GradientStop Color="#FFC33FD6" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Content>
+                    <TextBlock>
+            <Run Text="Módosítás"/>
+          
+            <Run Text="+ Hozzávalók" Foreground="Black"/>
+
+                    </TextBlock>
+                </Button.Content>
+            </Button>
+            <Button x:Name="btTorol" Content="Törlés" Width="100" Height="30" Margin="5" Background="#FFEC7857" Click="btTorol_Click"/>
+            <Button x:Name="btReszletek" Content="Részletek" Width="100" Height="30" Margin="5" Background="#81D4FA" Click="btReszletek_Click"/>
         </StackPanel>
 
     </Grid>

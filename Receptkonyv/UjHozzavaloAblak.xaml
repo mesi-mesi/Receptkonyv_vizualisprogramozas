@@ -21,6 +21,6 @@
         <TextBox x:Name="tbMennyiseg" VerticalContentAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="1"/>
 
         <Button x:Name="btMuvelet" Content="Hozzáadás" Grid.Row="2" Grid.ColumnSpan="2" Width="120" Height="30"
-                Background="#81C784" FontWeight="Bold" Click="Hozzaadas_Click"/>
+                Background="#AED581" Click="Hozzaadas_Click"/>
     </Grid>
 </Window>

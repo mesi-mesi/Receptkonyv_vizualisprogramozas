@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Receptkonyv.ReceptSzerkesztoAblak"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Recept Szerkesztése" Height="450" Width="800" WindowStartupLocation="CenterOwner">
+        Title="Recept Szerkesztése" Height="450" Width="700" WindowStartupLocation="CenterOwner">
 
     <Grid x:Name="grFelulet" Margin="15">
         <Grid.RowDefinitions>
@@ -17,7 +17,7 @@
             </StackPanel>
 
             <StackPanel Margin="5">
-                <Label Content="Elkészítési idő (perc):" FontWeight="Bold"/>
+                <Label Content="Idő (perc):" FontWeight="Bold"/>
                 <TextBox Text="{Binding ElkeszitesiIdo}" VerticalContentAlignment="Center" Height="25"/>
             </StackPanel>
 
@@ -31,30 +31,30 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="140"/>
             </Grid.ColumnDefinitions>
 
             <DataGrid x:Name="dgHozzavalok" Grid.Column="0" Margin="5" 
                       AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Megnevezés" Binding="{Binding Nev}" Width="*"/>
-                    <DataGridTextColumn Header="Mennyiség" Binding="{Binding Mennyiseg}" Width="150"/>
+                    <DataGridTextColumn Header="Mennyiség" Binding="{Binding Mennyiseg}" Width="100"/>
                 </DataGrid.Columns>
             </DataGrid>
 
             <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="5,0,0,0">
                 <Label Content="Műveletek:" FontWeight="Bold"/>
-                <Button x:Name="btHozzavaloUj" Content="Új hozzávaló" Margin="0,5" Height="30" Click="btHozzavaloUj_Click" Background="#E3F2FD"/>
-                <Button x:Name="btHozzavaloModosit" Content="Módosítás" Margin="0,5" Height="30" Click="btHozzavaloModosit_Click" Background="#FFFDE7"/>
-                <Button x:Name="btHozzavaloTorol" Content="Törlés" Margin="0,5" Height="30" Click="btHozzavaloTorol_Click" Background="#FFEBEE"/>
+                <Button x:Name="btHozzavaloUj" Content="Új hozzávaló" Margin="0,5" Height="30" Click="btHozzavaloUj_Click" Background="#FFC33FD6" FontWeight="SemiBold"/>
+                <Button x:Name="btHozzavaloModosit" Content="Módosítás" Margin="0,5" Height="30" Click="btHozzavaloModosit_Click" Background="#FFF176" FontWeight="SemiBold"/>
+                <Button x:Name="btHozzavaloTorol" Content="Törlés" Margin="0,5" Height="30" Click="btHozzavaloTorol_Click" Background="#FFEC7857" FontWeight="SemiBold"/>
             </StackPanel>
         </Grid>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="0,10,0,0">
-            <Button x:Name="btMentes" Content="Mentés" Width="120" Height="35" Margin="10,0" 
-                    IsDefault="True" Click="Mentés_Click" Background="#C8E6C9" FontWeight="Bold"/>
-            <Button x:Name="btMegse" Content="Mégse" Width="120" Height="35" Margin="0" 
-                    IsCancel="True" Background="#FFCCBC"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="0,15,0,0">
+            <Button x:Name="btMentes" Content="Mentés" Width="110" Height="35" Margin="10,0" 
+                    IsDefault="True" Click="Mentés_Click" Background="#AED581" Foreground="Black"/>
+            <Button x:Name="btMegse" Content="Mégse" Width="110" Height="35" Margin="0" 
+                    IsCancel="True" Background="#D2B48C" Foreground="Black" />
         </StackPanel>
     </Grid>
 </Window>

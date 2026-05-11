@@ -27,8 +27,8 @@
         <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,0" HorizontalAlignment="Center">
             <Label Content="Új Kategória neve:" VerticalAlignment="Center" FontWeight="Bold"/>
             <TextBox x:Name="tbUjKategoria" Width="120" Margin="5,0" VerticalContentAlignment="Center"/>
-            <Button x:Name="btUj" Content="Hozzáad" Width="80" Height="30" Margin="5" Background="#81C784" Click="btUj_Click"/>
-            <Button x:Name="btTorol" Content="Törlés" Width="80" Height="30" Margin="5" Background="#E57373" Foreground="White" Click="btTorol_Click"/>
+            <Button x:Name="btUj" Content="Hozzáad" Width="80" Height="30" Margin="5" Background="#AED581" Click="btUj_Click"/>
+            <Button x:Name="btTorol" Content="Törlés" Width="80" Height="30" Margin="5" Background="#FFEC7857" Foreground="Black" Click="btTorol_Click"/>
         </StackPanel>
     </Grid>
 </Window>

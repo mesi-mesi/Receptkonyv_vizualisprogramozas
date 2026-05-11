@@ -1,31 +1,41 @@
 ﻿<Window x:Class="Receptkonyv.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Receptkonyv"
-        mc:Ignorable="d"
-       Title="Receptkönyv - Főmenü" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Receptkönyv - Főmenü" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
 
-	<DockPanel>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" FontSize="14" Padding="5" Background="White" Panel.ZIndex="1">
+            <MenuItem Header="_Fájl">
+                <MenuItem Header="_Kilépés" Click="Kilepes_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Kezelés">
+                <MenuItem Header="_Kategóriák kezelése" Click="Kategoriak_Click"/>
+                <MenuItem Header="_Receptek kezelése" Click="Receptek_Click"/>
+            </MenuItem>
+        </Menu>
 
-		<Menu DockPanel.Dock="Top" FontSize="14" Padding="5">
-			<MenuItem Header="_Fájl">
-				<MenuItem Header="_Kilépés" Click="Kilepes_Click"/>
-			</MenuItem>
-			<MenuItem Header="_Kezelés">
-				<MenuItem Header="_Kategóriák kezelése" Click="Kategoriak_Click"/>
-				<MenuItem Header="_Receptek kezelése" Click="Receptek_Click"/>
-			</MenuItem>
-		</Menu>
+        <Grid Background="#FFF3E0">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="Szakácsmester" 
+                           FontSize="60" 
+                           FontWeight="ExtraLight" 
+                           Foreground="#EC7857" 
+                           HorizontalAlignment="Center" />
 
-		<Grid Background="#FFF3E0">
-			<TextBlock Text="Üdvözöllek a Receptkönyv alkalmazásban!"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       FontSize="28"
-                       FontWeight="Bold"
-                       Foreground="#D84315"/>
-		</Grid>
-	</DockPanel>
+                <TextBlock Text="Üdvözöllek a Receptkönyv alkalmazásban!"
+                           FontSize="22"
+                           FontWeight="Normal"
+                           Foreground="#5D4037"
+                           HorizontalAlignment="Center"/>
+
+                <TextBlock Text="A folytatáshoz használd a fenti menüsort" 
+                           FontSize="14" 
+                           FontStyle="Italic" 
+                           Foreground="#8D6E63" 
+                           Margin="0,20,0,0"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
 </Window>
