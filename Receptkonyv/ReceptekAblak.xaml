@@ -15,7 +15,7 @@
                      TextChanged="tbKereso_TextChanged"/>
 		</StackPanel>
 
-		<DataGrid x:Name="dgReceptek" Grid.Row="1" AutoGenerateColumns="False"
+        <DataGrid x:Name="dgReceptek" Grid.Row="1" AutoGenerateColumns="False"  AlternatingRowBackground="Bisque"
                   CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="Azonosító" Binding="{Binding Id}" Width="Auto"/>
