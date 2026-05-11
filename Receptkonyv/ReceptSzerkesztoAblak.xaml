@@ -44,17 +44,54 @@
 
             <StackPanel Grid.Column="1" VerticalAlignment="Top" Margin="5,0,0,0">
                 <Label Content="Műveletek:" FontWeight="Bold"/>
-                <Button x:Name="btHozzavaloUj" Content="Új hozzávaló" Margin="0,5" Height="30" Click="btHozzavaloUj_Click" Background="#FFC33FD6" FontWeight="SemiBold"/>
-                <Button x:Name="btHozzavaloModosit" Content="Módosítás" Margin="0,5" Height="30" Click="btHozzavaloModosit_Click" Background="#FFF176" FontWeight="SemiBold"/>
-                <Button x:Name="btHozzavaloTorol" Content="Törlés" Margin="0,5" Height="30" Click="btHozzavaloTorol_Click" Background="#FFEC7857" FontWeight="SemiBold"/>
+
+                <Button x:Name="btHozzavaloUj" Content="Új hozzávaló" Margin="0,5" Height="30" Click="btHozzavaloUj_Click" Foreground="Black">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                            <GradientStop Color="#E1BEE7" Offset="0.0"/>
+                            <GradientStop Color="#BA68C8" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+
+                <Button x:Name="btHozzavaloModosit" Content="Módosítás" Margin="0,5" Height="30" Click="btHozzavaloModosit_Click" Foreground="Black">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                            <GradientStop Color="#FFF9C4" Offset="0.0"/>
+                            <GradientStop Color="#FFF176" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+
+                <Button x:Name="btHozzavaloTorol" Content="Törlés" Margin="0,5" Height="30" Click="btHozzavaloTorol_Click" Foreground="Black">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                            <GradientStop Color="#FFCDD2" Offset="0.0"/>
+                            <GradientStop Color="#E57373" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
             </StackPanel>
         </Grid>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="0,15,0,0">
-            <Button x:Name="btMentes" Content="Mentés" Width="110" Height="35" Margin="10,0" 
-                    IsDefault="True" Click="Mentés_Click" Background="#AED581" Foreground="Black"/>
-            <Button x:Name="btMegse" Content="Mégse" Width="110" Height="35" Margin="0" 
-                    IsCancel="True" Background="#D2B48C" Foreground="Black" />
+            <Button x:Name="btMentes" Content="Mentés" Width="110" Height="35" Margin="10,0" IsDefault="True" Click="Mentés_Click" Foreground="Black">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Color="#C8E6C9" Offset="0.0"/>
+                        <GradientStop Color="#81C784" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+
+            <Button x:Name="btMegse" Content="Mégse" Width="110" Height="35" Margin="0" IsCancel="True" Foreground="Black">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                        <GradientStop Color="#F5F5DC" Offset="0.0"/>
+                        <GradientStop Color="#D2B48C" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

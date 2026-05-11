@@ -23,10 +23,22 @@ namespace Receptkonyv
         // Adatok betöltése a hozzávalókkal együtt (Include)
         private void AdatokBetoltese()
         {
-            dgReceptek.ItemsSource = db.Receptek
-                                       .Include(r => r.Kategoria)
-                                       .Include(r => r.Hozzavalok)
-                                       .ToList();
+            var lista = db.Receptek
+                          .Include(r => r.Kategoria)
+                          .Include(r => r.Hozzavalok)
+                          .ToList();
+
+            dgReceptek.ItemsSource = lista;
+
+            // Automatikus kijelölés
+            if (lista.Any())
+            {
+                dgReceptek.SelectedIndex = 0;
+            }
+            else
+            {
+                dgHozzavalok.ItemsSource = null;
+            }
         }
 
         // Szűrés a memóriában lévő listán
@@ -41,15 +53,36 @@ namespace Receptkonyv
                                .ToList();
 
             dgReceptek.ItemsSource = szurtLista;
+
+            if (szurtLista.Any())
+            {
+                dgReceptek.SelectedIndex = 0;
+            }
+            else
+            {
+                dgHozzavalok.ItemsSource = null;
+            }
         }
 
-        // Új objektum felvitele az adatbázisba
+        // === MASTER-DETAIL ESEMÉNYKEZELŐ ===
+        private void dgReceptek_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dgReceptek.SelectedItem is Recept kivalasztottRecept)
+            {
+                dgHozzavalok.ItemsSource = kivalasztottRecept.Hozzavalok;
+            }
+            else
+            {
+                dgHozzavalok.ItemsSource = null;
+            }
+        }
+
+        // Új objektum felvitele
         private void btUj_Click(object sender, RoutedEventArgs e)
         {
             var ujRecept = new Recept();
             var kategoriak = db.Kategoriak.ToList();
 
-            // Átadjuk a db kontextust is a hozzávalók kezeléséhez
             var ablak = new ReceptSzerkesztoAblak(ujRecept, kategoriak, db) { Owner = this };
 
             if (ablak.ShowDialog() == true)
@@ -67,7 +100,6 @@ namespace Receptkonyv
             {
                 var kategoriak = db.Kategoriak.ToList();
 
-                // Átadjuk a db kontextust is a hozzávalók kezeléséhez
                 var ablak = new ReceptSzerkesztoAblak(kivalasztottRecept, kategoriak, db) { Owner = this };
 
                 if (ablak.ShowDialog() == true)
@@ -78,7 +110,7 @@ namespace Receptkonyv
             }
             else
             {
-                MessageBox.Show("Kérlek, válassz ki egy receptet a módosításhoz!");
+                MessageBox.Show("Kérlek, válassz ki egy receptet a módosításhoz!", "Figyelem", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -87,8 +119,8 @@ namespace Receptkonyv
         {
             if (dgReceptek.SelectedItem is Recept kivalasztottRecept)
             {
-                var valasz = MessageBox.Show($"Biztosan törlöd a(z) '{kivalasztottRecept.Cim}' receptet?",
-                                             "Törlés", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                var valasz = MessageBox.Show($"Biztosan törlöd a(z) '{kivalasztottRecept.Cim}' receptet és a hozzá tartozó összes hozzávalót?",
+                                             "Törlés megerősítése", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                 if (valasz == MessageBoxResult.Yes)
                 {
@@ -97,42 +129,9 @@ namespace Receptkonyv
                     AdatokBetoltese();
                 }
             }
-        }
-
-        // A kiválasztott recept hozzávalóinak megjelenítése
-        private void btReszletek_Click(object sender, RoutedEventArgs e)
-        {
-            if (dgReceptek.SelectedItem is Recept kivalasztott)
-            {
-                var receptHozzavalokkal = db.Receptek
-                                            .Include(r => r.Hozzavalok)
-                                            .FirstOrDefault(r => r.Id == kivalasztott.Id);
-
-                if (receptHozzavalokkal != null)
-                {
-                    string uzenet = $"=== {receptHozzavalokkal.Cim.ToUpper()} ===\n\n";
-
-                    if (receptHozzavalokkal.Hozzavalok != null && receptHozzavalokkal.Hozzavalok.Any())
-                    {
-                        uzenet += "Szükséges hozzávalók:\n";
-                        uzenet += "----------------------------------\n";
-                        foreach (var h in receptHozzavalokkal.Hozzavalok)
-                        {
-                            uzenet += $"• {h.Nev}: {h.Mennyiseg}\n";
-                        }
-                    }
-                    else
-                    {
-                        uzenet += "Ehhez a recepthez még nem rögzítettél hozzávalókat.\n";
-                        uzenet += "Használd a szerkesztőablakot a bővítéshez!";
-                    }
-
-                    MessageBox.Show(uzenet, "Recept Részletei", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-            }
             else
             {
-                MessageBox.Show("Kérlek, előbb válassz ki egy receptet a listából!", "Nincs kijelölés", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Kérlek, válassz ki egy receptet a törléshez!", "Figyelem", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }

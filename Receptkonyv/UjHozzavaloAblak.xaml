@@ -20,7 +20,13 @@
         <Label Content="Mennyiség:" FontWeight="Bold" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
         <TextBox x:Name="tbMennyiseg" VerticalContentAlignment="Center" Margin="5" Grid.Row="1" Grid.Column="1"/>
 
-        <Button x:Name="btMuvelet" Content="Hozzáadás" Grid.Row="2" Grid.ColumnSpan="2" Width="120" Height="30"
-                Background="#AED581" Click="Hozzaadas_Click"/>
+        <Button x:Name="btMuvelet" Content="Hozzáadás" Grid.Row="2" Grid.ColumnSpan="2" Width="120" Height="30" Click="Hozzaadas_Click" Foreground="Black">
+            <Button.Background>
+                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                    <GradientStop Color="#C8E6C9" Offset="0.0"/>
+                    <GradientStop Color="#81C784" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
     </Grid>
 </Window>
